@@ -2,6 +2,23 @@
 
 #include <gtest.h>
 
+//using namespace testing;
+//
+//class TMatrixTest : public Test
+//{
+//private:
+//	TMatrix<int> m;
+//
+//public:
+//	void Create(int size) {
+//		m = TMatrix<int>(size);
+//	}
+//};
+//
+//TEST_F(TMatrixTest, can_create_matrix_with_positive_length) {
+//	ASSERT_NO_THROW(Create(5));
+//}
+
 TEST(TMatrix, can_create_matrix_with_positive_length)
 {
 	ASSERT_NO_THROW(TMatrix<int> m(5));
@@ -96,16 +113,13 @@ TEST(TMatrix, can_assign_matrices_of_equal_size)
 		a[i][i] = i;
 	}
 	b = a;
-}
 
-TEST(TMatrix, assign_operator_change_matrix_size)
-{
 	EXPECT_EQ(0, b[0][0]);
 	EXPECT_EQ(1, b[1][1]);
 	EXPECT_EQ(2, b[2][2]);
 }
 
-TEST(TMatrix, can_assign_matrices_of_different_size)
+TEST(TMatrix, assign_operator_change_matrix_size)
 {
 	TMatrix<int> a(3);
 	a = TMatrix<int>(4);
@@ -113,7 +127,7 @@ TEST(TMatrix, can_assign_matrices_of_different_size)
 	EXPECT_EQ(4, a.GetSize());
 }
 
-TEST(TMatrix, compare_equal_matrices_return_true)
+TEST(TMatrix, can_assign_matrices_of_different_size)
 {
 	TMatrix<int> a(3), b(2);
 	b = a;
@@ -121,25 +135,25 @@ TEST(TMatrix, compare_equal_matrices_return_true)
 	EXPECT_EQ(3, b.GetSize());
 }
 
-TEST(TMatrix, compare_matrix_with_itself_return_true)
+TEST(TMatrix, compare_equal_matrices_return_true)
 {
 	TMatrix<int> a(3), b(3);
 	EXPECT_TRUE(b == a);
 }
 
-TEST(TMatrix, matrices_with_different_size_are_not_equal)
+TEST(TMatrix, compare_matrix_with_itself_return_true)
 {
 	TMatrix<int> a(3);
 	EXPECT_TRUE(a == a);
 }
 
-TEST(TMatrix, can_add_matrices_with_equal_size)
+TEST(TMatrix, matrices_with_different_size_are_not_equal)
 {
 	TMatrix<int> a(3), b(2);
 	EXPECT_FALSE(b == a);
 }
 
-TEST(TMatrix, cant_add_matrices_with_not_equal_size)
+TEST(TMatrix, can_add_matrices_with_equal_size)
 {
 	TMatrix<int> a(3);
 	a[0][0] = 1;
@@ -155,14 +169,13 @@ TEST(TMatrix, cant_add_matrices_with_not_equal_size)
 	EXPECT_EQ(result, sum);
 }
 
-TEST(TMatrix, can_subtract_matrices_with_equal_size)
+TEST(TMatrix, cant_add_matrices_with_not_equal_size)
 {
-
 	TMatrix<int> a(3), b(4);
 	ASSERT_ANY_THROW(a + b);
 }
 
-TEST(TMatrix, cant_subtract_matrixes_with_not_equal_size)
+TEST(TMatrix, can_subtract_matrices_with_equal_size)
 {
 	TMatrix<int> a(3), b(3);
 	TMatrix<int> result(3);
@@ -174,3 +187,11 @@ TEST(TMatrix, cant_subtract_matrixes_with_not_equal_size)
 	TMatrix<int> c = a - b;
 	EXPECT_EQ(result, c);
 }
+
+TEST(TMatrix, cant_subtract_matrixes_with_not_equal_size)
+{
+	TMatrix<int> a(3), b(4);
+	ASSERT_ANY_THROW(a - b);
+}
+
+
