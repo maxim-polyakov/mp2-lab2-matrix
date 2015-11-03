@@ -14,8 +14,8 @@ template <class ValType>
 class TVector {
 protected:
 	ValType *pVector;
-	int Size;       // размер вектора
-	int StartIndex; // индекс первого элемента вектора
+	int Size;       // размер вектора//
+	int StartIndex; // индекс первого элемента вектора//
 public:
 	TVector(int s = 10, int si = 0);
 	TVector(const TVector &v);                // конструктор копирования

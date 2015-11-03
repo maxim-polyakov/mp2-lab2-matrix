@@ -15,7 +15,7 @@ class TMatrix : public TVector<TVector<ValType> >
 {
 public:
 	TMatrix(int s = 10);
-	TMatrix(const TMatrix &mt);                    // копирование
+	TMatrix(const TMatrix &mt);                    // копирование//
 	TMatrix(const TVector<TVector<ValType> > &mt); // преобразование типа
 
 	bool operator==(const TMatrix &mt) const;      // сравнение
