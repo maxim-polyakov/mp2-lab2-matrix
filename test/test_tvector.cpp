@@ -31,13 +31,10 @@ TEST(TVector, can_create_copied_vector)
 
 TEST(TVector, copied_vector_is_equal_to_source_one)
 {
-	int size = 2;
-	TVector<int> a(size);
-	a[0] = 1;
-	a[1] = 2;
-	TVector<int> b = a;
-	EXPECT_EQ(1, b[0]); // fix
-	EXPECT_EQ(2, b[1]);
+	TVector <int> v1(6);
+	TVector <int> v2(v1);
+
+	EXPECT_EQ(v1, v2);
 }
 
 TEST(TVector, copied_vector_has_its_own_memory)
@@ -63,10 +60,10 @@ TEST(TVector, can_get_start_index)
 	EXPECT_EQ(2, v.GetStartIndex());
 }
 
-TEST(TVector, can_get_element_less_than_start_index) {
-	TVector<int> v(2, 1);
+TEST(TVector, checking_filling_memory) {
+	TVector<int> v(2);
 
-	EXPECT_EQ(0, v[-1]); //fix
+	EXPECT_EQ(0, v[0]);
 }
 
 TEST(TVector, can_set_and_get_element)
@@ -76,7 +73,7 @@ TEST(TVector, can_set_and_get_element)
 
 	EXPECT_EQ(4, v[0]);
 }
-
+//----------------------------------------------------------------
 TEST(TVector, throws_when_set_element_with_negative_index)
 {
 	int size = 3;
@@ -84,7 +81,7 @@ TEST(TVector, throws_when_set_element_with_negative_index)
 
 	ASSERT_ANY_THROW(a[-1] = 0);
 }
-
+//----------------------------------------------------------------
 TEST(TVector, throws_when_set_element_with_too_large_index)
 {
 	int size = 3;
@@ -95,28 +92,21 @@ TEST(TVector, throws_when_set_element_with_too_large_index)
 
 TEST(TVector, can_assign_vector_to_itself)
 {
-	int size = 2;
-	TVector<int> a(size);
-	a[0] = 1;
-	a[1] = 2;
-	a = a;
-	EXPECT_EQ(1, a[0]); //fix
-	EXPECT_EQ(2, a[1]);
-	EXPECT_TRUE(a == a);
+	TVector<int> v(10);
+	EXPECT_TRUE(v == v);
 }
 
 TEST(TVector, can_assign_vectors_of_equal_size)
 {
-	int size = 3;
-	TVector<int> a(size), b(size);
-	for (int i = 0; i < size; i++) {
-		a[i] = i;
-	}
-	b = a;
+	TVector<int> v(2);
+	TVector<int> v1(2);
 
-	EXPECT_EQ(0, b[0]); // fix
-	EXPECT_EQ(1, b[1]);
-	EXPECT_EQ(2, b[2]);
+	v[0] = 1;
+	v[1] = 2;
+
+	v1 = v;
+
+	EXPECT_EQ(v1, v);
 }
 
 TEST(TVector, assign_operator_change_vector_size)
@@ -129,20 +119,23 @@ TEST(TVector, assign_operator_change_vector_size)
 
 TEST(TVector, can_assign_vectors_of_different_size)
 {
-	TVector<int> a(3), b(2);
-	b = a;
+	TVector<int> v(3);
+	TVector<int> v1(2);
 
-	EXPECT_EQ(3, b.GetSize()); //fix
+	v[0] = 1;
+	v[1] = 2;
+	v[2] = 3;
+
+	v1 = v;
+
+	EXPECT_EQ(v1, v);
 }
 
 TEST(TVector, compare_equal_vectors_return_true)
 {
-	TVector<int> a(2), b(2);
-	a[0] = 0;
-	a[1] = 1;
-	b = a; //fix
-
-	EXPECT_TRUE(a == b);
+	TVector <int> v1(6);
+	TVector <int> v2(6);
+	EXPECT_TRUE(v2 == v1);
 }
 
 TEST(TVector, compare_vector_with_itself_return_true)
@@ -154,48 +147,58 @@ TEST(TVector, compare_vector_with_itself_return_true)
 
 TEST(TVector, vectors_with_different_size_are_not_equal)
 {
-	TVector<int> a(2), b(4);
-	if (a == b) //fix
-	{
+	TVector <int> v1(6);
+	TVector <int> v2(13);
 
-	}
-	EXPECT_NE(a, b);
+	EXPECT_TRUE(v1 != v2);
 }
 
 TEST(TVector, can_add_scalar_to_vector)
 {
-	TVector<int> a(2);
-	int b = 2;
-	a[0] = 0;
-	a[1] = 1;
-	a = a + b;
+	TVector <int> v1(3);
+	TVector <int> v2(3);
+	TVector <int> res(3);
+	v1[0] = 1;
+	v1[2] = 3;
 
-	EXPECT_EQ(2, a[0]); //fix a = vec
-	EXPECT_EQ(3, a[1]);
+	v2[0] = 2;
+	v2[1] = 1;
+	v2[2] = 4;
+	res = v1 + 1;
+
+	EXPECT_EQ(res, v2);
 }
 
 TEST(TVector, can_subtract_scalar_from_vector)
 {
-	TVector<int> a(2);
-	int b = 2;
-	a[0] = 0;
-	a[1] = 1;
-	a = a - b;
+	TVector <int> v1(3);
+	TVector <int> v2(3);
+	TVector <int> res(3);
+	v1[0] = 1;
+	v1[2] = 3;
 
-	EXPECT_EQ(-2, a[0]); //fix
-	EXPECT_EQ(-1, a[1]);
+	v2[0] = 0;
+	v2[1] = -1;
+	v2[2] = 2;
+	res = v1 - 1;
+
+	EXPECT_EQ(res, v2);
 }
 
 TEST(TVector, can_multiply_scalar_by_vector)
 {
-	TVector<int> a(2);
-	int b = 2;
-	a[0] = 0;
-	a[1] = 1;
-	a = a*b;
+	TVector <int> v1(3);
+	TVector <int> v2(3);
+	TVector <int> res(3);
+	v1[0] = 1;
+	v1[2] = 3;
 
-	EXPECT_EQ(0, a[0]);//fix
-	EXPECT_EQ(2, a[1]);
+	v2[0] = 2;
+	v2[1] = 0;
+	v2[2] = 6;
+	res = v1 * 2;
+
+	EXPECT_EQ(res, v2);
 }
 
 TEST(TVector, can_add_vectors_with_equal_size)
