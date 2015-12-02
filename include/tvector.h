@@ -35,7 +35,7 @@ public:
 	// векторные операции
 	TVector  operator+(const TVector &v);     // сложение
 	TVector  operator-(const TVector &v);     // вычитание
-	ValType  operator*(const TVector &v);     // скалярное произведение
+	TVector  operator*(const TVector &v);     // произведение
 
 	// ввод-вывод
 	friend istream& operator>>(istream &in, TVector &v) {
@@ -193,7 +193,7 @@ TVector<ValType> TVector<ValType>::operator-(const TVector<ValType> &v) {
 	throw invalid_argument("Вычитание векторов разной длины");
 } /*-------------------------------------------------------------------------*/
 
-template <class ValType> // скалярное произведение
+/*template <class ValType> // покомпонентное произведение
 ValType TVector<ValType>::operator*(const TVector<ValType> &v) {
 	ValType result = 0;
 	if (GetSize() == v.GetSize()) {
@@ -204,4 +204,15 @@ ValType TVector<ValType>::operator*(const TVector<ValType> &v) {
 	}
 	throw invalid_argument("Скалярное произведение векторов разной длины");
 } /*-------------------------------------------------------------------------*/
+template <class ValType> 
+TVector<ValType> TVector<ValType>::operator*(const TVector<ValType> &v){
+	if (GetSize() != v.GetSize() || GetStartIndex() != v.GetStartIndex()) {//?
+		throw invalid_argument("Умножение векторов разной длины");//?
+	}
+	TVector<ValType> result(GetSize(), GetStartIndex());
+	for (int i = StartIndex; i < Size + StartIndex; i++) {
+		result[i] = (*this)[i] * v[i];
+	}
+	return result;
+	}
 #endif
