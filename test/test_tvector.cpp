@@ -256,8 +256,8 @@ TEST(TVector, cant_subtract_vectors_with_not_equal_size)
 TEST(TVector, can_multiply_vectors_with_equal_size)
 {
 	TVector<int> a(2), b(2);
-	int actual;
-	int expected;
+	TVector<int> actual(2);
+	TVector<int> expected(2);
 	a[0] = 2;
 	a[1] = 4;
 
@@ -266,7 +266,8 @@ TEST(TVector, can_multiply_vectors_with_equal_size)
 
 	actual = a * b;
 
-	expected = 14;
+	expected[0] =2 ;
+	expected[1]=12;
 
 	EXPECT_EQ(expected, actual);
 }
