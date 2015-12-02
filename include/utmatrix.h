@@ -23,7 +23,7 @@ public:
 	TMatrix& operator= (const TMatrix &mt);        // присваивание
 	TMatrix  operator+ (const TMatrix &mt);        // сложение
 	TMatrix  operator- (const TMatrix &mt);        // вычитание
-	TMatrix  operator* (const TMatrix &mt);		 // умножение
+//	TMatrix  operator* (const TMatrix &mt);		 // умножение
 
 	// ввод / вывод
 	friend istream& operator>>(istream &in, TMatrix &mt)
@@ -138,7 +138,7 @@ TMatrix<ValType> TMatrix<ValType>::operator-(const TMatrix<ValType> &mt)
 	return result;
 } /*-------------------------------------------------------------------------*/
 
-template <class ValType> // умножение
+/*template <class ValType> // умножение
 TMatrix<ValType> TMatrix<ValType>::operator* (const TMatrix<ValType> &mt) {
 	if (Size != mt.GetSize()) {
 		throw invalid_argument("Матрицы разного размера -");
