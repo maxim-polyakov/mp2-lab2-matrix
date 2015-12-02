@@ -70,7 +70,7 @@ TVector<ValType>::TVector(int s, int si = 0) {
 
 } /*-------------------------------------------------------------------------*/
 
-template <class ValType> //конструктор копирования
+template <class ValType> //конструктор копирования//
 TVector<ValType>::TVector(const TVector<ValType> &v) {
 	Size = v.Size;
 	StartIndex = v.StartIndex;
